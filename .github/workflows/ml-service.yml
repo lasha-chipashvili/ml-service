@@ -27,7 +27,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest API/test_app.py
+          PYTHONPATH=. pytest API/test_app.py
 
       - name: Model Evaluation & Metric Check
         run: |

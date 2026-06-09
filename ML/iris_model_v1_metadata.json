@@ -1,0 +1,16 @@
+{
+  "model_name": "iris-logistic-regression",
+  "model_version": "1.0.0",
+  "features": [
+    "sepal length (cm)",
+    "sepal width (cm)",
+    "petal length (cm)",
+    "petal width (cm)"
+  ],
+  "classes": [
+    "setosa",
+    "versicolor",
+    "virginica"
+  ],
+  "accuracy": 0.9211
+}

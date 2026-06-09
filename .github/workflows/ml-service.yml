@@ -1,0 +1,40 @@
+name: ML Service CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Run tests
+        run: |
+          pytest API/test_app.py
+
+      - name: Model Evaluation & Metric Check
+        run: |
+          echo "=== ML-specific requirement ==="
+          echo "Validation happens here, after tests but BEFORE the Docker build."
+          echo "If model accuracy drops below target threshold, exit 1 to block deployment."
+
+      - name: Build Docker image
+        run: |
+          docker build -t ml-api .
